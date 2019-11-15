@@ -11,9 +11,8 @@ class Scraper
     
     student_index_array = []
     
-    index_page.css("div.roster-cards-container").collect do |students|
-      student_index_array << {:name => students.css("div.student-name").text, :location => students.css("p.student-location").text, :profile_url => students.xpath("div.view-profile-div/a/@href")}
-     
+    index_page.css("div.roster-cards-container div.student-card a").collect do |students|
+      student_index_array << {:name => students.css("h4.student-name").text, :location => students.css("p.student-location").text, :profile_url => students.attribute("href").value}
     end
     student_index_array
   end
