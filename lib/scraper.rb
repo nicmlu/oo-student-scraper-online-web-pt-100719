@@ -31,7 +31,7 @@ class Scraper
     profile_page = Nokogiri::HTML(html)
     
     profile_page.css("div.vitals-container div.details-container a").collect do |student|
-      student = {:twitter => students.css("").text, :linkedin => students.css("").text, :github => students.attribute("href").value, :blog => student.attribute("href").value}
+      student = {:twitter => students.css("div.social-icon-container").attribute("href"), :linkedin => students.css("").text, :github => students.attribute("href").value, :blog => student.attribute("href").value, :profile_quote => student.css("div.profile-quote").text, :bio => student.css("div.bio-block details-block div.bio-content content-holder").text}
     end
     student
   end
