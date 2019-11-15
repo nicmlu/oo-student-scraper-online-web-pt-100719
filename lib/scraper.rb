@@ -16,10 +16,25 @@ class Scraper
     end
     student_index_array
   end
+  
+# main page: 
+# :twitter => 
+# :linkedin => 
+# :github => 
+# :blog =>
+# :profile_quote => 
+# :bio => 
 
   def self.scrape_profile_page(profile_url)
-    scraped_student = Nokogiri::HTML(open(profile_url))
+    html = open(profile_url)
+    
+    profile_page = Nokogiri::HTML(html)
+    
+    profile_page.css("div.vitals-container div.details-container a").collect do |student|
+      student = {:twitter => students.css("").text, :linkedin => students.css("").text, :github => students.attribute("href").value, :blog => student.attribute("href").value}
+    end
+    student
   end
-
+  
 end
 
