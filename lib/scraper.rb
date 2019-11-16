@@ -23,7 +23,7 @@ class Scraper
     
     profile_page = Nokogiri::HTML(open(profile_url))
     
-    student_profile = Hash.new
+    student_profile = {}
     
     profile_page.css("div.social-icon-container").xpath("//div/a/@href").each do |icon|
     
@@ -38,8 +38,8 @@ class Scraper
     end 
   end 
     
-  profile_page[:profile_quote] = profile_page.css("div.profile-quote").text
-  profile_page[:bio] = profile_page.css("div.bio-block details-block div.bio-content content-holder").text
+  profile_page[:profile_quote] = profile_page.css("div.vitals-text-container div.profile-quote").text
+  profile_page[:bio] = profile_page.css("div.description-holder p").text
   student_profile
   end
 end
