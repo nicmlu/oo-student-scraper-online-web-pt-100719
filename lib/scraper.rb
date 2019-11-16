@@ -31,9 +31,9 @@ class Scraper
        student_profile[:twitter] = icon.value 
     elsif icon.value.include?("linkedin")
       student_profile[:linkedin] = icon.value
-    elsif profile_page.attribute("href").value.include?("github")
+    elsif icon.value.include?("github")
       student_profile[:github] = icon.value
-    else profile_page.attribute("href").value.include?("blog")
+    else icon.value.include?("blog")
       student_profile[:blog] = icon.value
     end 
   end 
@@ -41,5 +41,6 @@ class Scraper
   profile_page[:profile_quote] = profile_page.css("div.profile-quote").text
   profile_page[:bio] = profile_page.css("div.bio-block details-block div.bio-content content-holder").text
   student_profile
+  end
 end
 
