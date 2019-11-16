@@ -26,14 +26,21 @@ class Scraper
     
     profile_page = profile_scrape.css("div.vitals-container div.details-container a")
     
-    {
-      :twitter => profile_page.css("div.social-icon-container").attribute("href").value, 
-      :linkedin => profile_page.css("div.social-icon-container").attribute("href").value,
-      :github => profile_page.css("div.social-icon-container").attribute("href").value,
-      :blog => profile_page.css("div.social-icon-container").attribute("href").value,
-      :profile_quote => profile_page.css("div.profile-quote").text, 
-      :bio => profile_page.css("div.bio-block details-block div.bio-content content-holder").text
-    }
-  end
+    student_profile = Hash.new
+    
+    if profile_page.attribute("href").value.include?("twitter")
+       student_profile[:twitter] = profile_page.attribute("href").value 
+    elsif profile_page.attribute("href").value.include?("linkedin")
+      student_profile[:linkedin] = profile_page.attribute("href").value
+    elsif profile_page.attribute("href").value.include?("github")
+      student_profile[:github] = profile_page.attribute("href").value
+    elsif profile_page.attribute("href").value.include?("blog")
+      student_profile[:blog] = profile_page.attribute("href").value
+    elsif profile_page.attribute("href").value.include?("profile quote")
+      profile_page[:profile_quote] = profile_page.css("div.profile-quote").text
+    else 
+      profile_page[:bio] = profile_page.css("div.bio-block details-block div.bio-content content-holder").text
+    end 
+  student_profile
 end
 
