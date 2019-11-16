@@ -20,10 +20,10 @@ class Student
 
   def self.create_from_collection(students_array)
     # binding.pry
-    students_array.each do |student|
-      student = Student.new
-      student.name = student[:name]
-      student.location = student[:location]
+    students_array.each do |student_hash|
+      student = Student.new(student_hash)
+      student.name = student_hash[:name]
+      student.location = student_hash[:location]
     end
   end
 
