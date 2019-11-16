@@ -1,3 +1,4 @@
+require 'pry'
 class Student
 
   attr_accessor :name, :location, :twitter, :linkedin, :github, :blog, :profile_quote, :bio, :profile_url 
@@ -14,10 +15,16 @@ class Student
     @profile_quote = student_hash[:profile_quote]
     @bio = student_hash[:bio]
     @profile_url = student_hash[:profile_url]
+    @@all.push(self)
   end
 
   def self.create_from_collection(students_array)
-    
+    # binding.pry
+    students_array.each do |student|
+      student = Student.new
+      student.name = student[:name]
+      student.location = student[:location]
+    end
   end
 
   def add_student_attributes(attributes_hash)
@@ -27,5 +34,6 @@ class Student
   def self.all
     @@all
   end
+  
 end
 
